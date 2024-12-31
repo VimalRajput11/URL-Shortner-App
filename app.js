@@ -2,7 +2,7 @@ import http from "http";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-
+const PORT = process.env.PORT || 3000;
 // In-memory storage for links (simulate persistent storage)
 const links = {};
 
@@ -80,6 +80,6 @@ const server = http.createServer(async (req, res) => {
 });
 
 // Start the server and bind it to all available network interfaces
-server.listen(3000, '0.0.0.0', () => {
-  console.log("Server is running on port 3000");
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port  http://localhost:${PORT}`);
 });
