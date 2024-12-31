@@ -80,6 +80,6 @@ const server = http.createServer(async (req, res) => {
 });
 
 // Start the server and bind it to all available network interfaces
-server.listen(PORT, '0.0.0.0', () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port  http://localhost:${PORT}`);
 });
