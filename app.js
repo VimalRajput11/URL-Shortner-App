@@ -2,10 +2,12 @@ import http from "http";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+
 const PORT = process.env.PORT || 3000;
 // In-memory storage for links (simulate persistent storage)
 const links = {};
 
+// Helper function to serve static files
 const serveFile = async (res, filename, contentType) => {
   try {
     const data = await fs.promises.readFile(filename);
@@ -22,10 +24,10 @@ const server = http.createServer(async (req, res) => {
   if (req.method === "GET") {
     if (req.url === "/") {
       // Serve the index.html file
-      return serveFile(res, path.join(__dirname, "index.html"), "text/html");
+      return serveFile(res, path.join("index.html"), "text/html");
     } else if (req.url === "/style.css") {
       // Serve the style.css file
-      return serveFile(res, path.join(__dirname, "style.css"), "text/css");
+      return serveFile(res, path.join( "style.css"), "text/css");
     } else if (req.url.startsWith("/")) {
       // Handle short URL redirection
       const shortCode = req.url.slice(1);
@@ -79,7 +81,6 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-// Start the server and bind it to all available network interfaces
 server.listen(PORT, () => {
-  console.log(`Server is running on port  http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
