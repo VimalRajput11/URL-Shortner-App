@@ -6,7 +6,6 @@ import crypto from "crypto";
 // In-memory storage for links (simulate persistent storage)
 const links = {};
 
-// Helper function to serve static files
 const serveFile = async (res, filename, contentType) => {
   try {
     const data = await fs.promises.readFile(filename);
@@ -80,7 +79,7 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-// Start the server
-server.listen(3000, () => {
+// Start the server and bind it to all available network interfaces
+server.listen(3000, '0.0.0.0', () => {
   console.log("Server is running on port 3000");
 });
