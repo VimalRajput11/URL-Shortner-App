@@ -1,0 +1,265 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px; /* Added padding for small screens */
+}
+
+.container {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 450px; /* Ensures container is not too wide on large screens */
+    transition: transform 0.3s ease-in-out;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #2196f3;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form div {
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1.1rem;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);
+    border-color: #2196f3;
+}
+
+button {
+    background: #2196f3;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #1e88e5;
+    transform: translateY(-3px);
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-top: 30px;
+    color: #2196f3;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    margin-top: 10px;
+    padding: 0;
+}
+
+li {
+    background: #f5f8fc;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    color: #333;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+li:hover {
+    background: #e3f2fd;
+    transform: translateY(-3px);
+}
+
+a {
+    text-decoration: none;
+    color: #2196f3;
+    font-weight: bold;
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* Ensures long URLs wrap properly */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the shortened URL section */
+#shortened-URLs {
+    padding-top: 20px;
+}
+
+.shortened-link {
+    background: #f1f8e9;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    word-wrap: break-word;
+    color:  #2196f3;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    word-break: break-word;
+}
+
+.shortened-link a {
+    text-decoration: none;
+    color:  #2196f3;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.shortened-link a:hover {
+    color:  #2196f3;
+}
+
+.shortened-link .original-url {
+    font-size: 1rem;
+    color: #2196f3;
+    word-wrap: break-word;
+    margin-top: 5px;
+    word-break: break-word; 
+}
+
+.shortened-link button {
+    background: #2196f3;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.shortened-link button:hover {
+    background: #2196f3;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For devices with a max-width of 600px (Mobile devices) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    form div {
+        text-align: left;
+    }
+
+    input, button {
+        font-size: 1rem;
+    }
+
+    .shortened-link {
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .shortened-link a {
+        font-size: 1rem;
+    }
+}
+
+/* For devices between 601px and 1024px (Tablets and small laptops) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 25px;
+        width: 90%;
+    }
+
+    input, button {
+        font-size: 1.1rem;
+    }
+
+    .shortened-link {
+        font-size: 1.1rem;
+    }
+
+    .shortened-link a {
+        font-size: 1.1rem;
+    }
+}
+
+/* For devices larger than 1024px (Laptops and Desktops) */
+@media (min-width: 1025px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    .container {
+        width: 450px;
+        max-width: 100%;
+    }
+
+    .shortened-link {
+        font-size: 1.2rem;
+    }
+}

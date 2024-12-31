@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="url.png" type="image/x-icon">
+    <title>URL Shortener App</title>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Shortener App</h1>
+        <form id="shorten-form">
+            <div>
+                <label for="url">Enter URL</label>
+                <input type="url" name="url" id="url" placeholder="www.example.com" required>
+            </div>
+            <div>
+                <label for="shortcode">Enter Shortcode (Optional)</label>
+                <input type="text" name="shortcode" id="shortcode" placeholder="custom-code">
+            </div>
+            <button type="submit">Shorten</button>
+        </form>
+
+        <h2>Shortened URLs</h2>
+        <div id="shortened-urls"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('shorten-form');
+        const shortenedUrlsDiv = document.getElementById('shortened-urls');
+
+        // Load saved links from localStorage
+        const loadLinks = () => {
+            const storedLinks = JSON.parse(localStorage.getItem('links')) || {};
+            Object.entries(storedLinks).forEach(([shortCode, url]) => renderLink(shortCode, url));
+        };
+
+        // Render a shortened link dynamically
+        const renderLink = (shortCode, url) => {
+            const div = document.createElement('div');
+            div.className = 'shortened-link';
+            div.innerHTML = `
+                <a href="${url}" target="_blank">${window.location.origin}/${shortCode}</a>
+                <p>${url}</p>
+                <button onclick="copyToClipboard('${window.location.origin}/${shortCode}')">Copy</button>
+            `;
+            shortenedUrlsDiv.appendChild(div);
+        };
+
+        // Handle form submission
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const url = formData.get('url').trim();
+            const shortCode = formData.get('shortcode').trim();
+
+            const newShortCode = shortCode || generateRandomCode();
+
+            // Retrieve links from localStorage
+            let links = JSON.parse(localStorage.getItem('links')) || {};
+
+            if (links[newShortCode]) {
+                alert("Short code already exists. Please choose another.");
+                return;
+            }
+
+            // Save the new link in localStorage
+            links[newShortCode] = url;
+            localStorage.setItem('links', JSON.stringify(links));
+
+            // Render the new link
+            renderLink(newShortCode, url);
+
+            // Reset form
+            form.reset();
+        });
+
+        // Generate a random shortcode
+        const generateRandomCode = () => {
+            return Math.random().toString(36).substring(2, 8);
+        };
+
+        // Copy text to clipboard
+        const copyToClipboard = (text) => {
+            navigator.clipboard.writeText(text)
+                .then(() => alert('URL copied to clipboard!'))
+                .catch((error) => {
+                    console.error('Error copying text:', error);
+                    alert('Failed to copy URL.');
+                });
+        };
+
+        // Load links when the page loads
+        loadLinks();
+    </script>
+</body>
+</html>
